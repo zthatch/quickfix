@@ -212,6 +212,7 @@ public:
     m_pLog->backup();
   }
   void onIncoming(const std::string &string) {
+    std::cout << "DEBUG: SessionState::onIncoming - Has log: " << (m_pLog != nullptr ? "yes" : "no") << std::endl;
     if (!m_pLog) {
       return;
     }
@@ -219,6 +220,7 @@ public:
     m_pLog->onIncoming(string);
   }
   void onOutgoing(const std::string &string) {
+    std::cout << "DEBUG: SessionState::onOutgoing - Has log: " << (m_pLog != nullptr ? "yes" : "no") << std::endl;
     if (!m_pLog) {
       return;
     }

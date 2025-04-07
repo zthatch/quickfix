@@ -608,8 +608,10 @@ bool Session::sendRaw(Message &message, SEQNUM num) {
 
 bool Session::send(const std::string &string) {
   if (!m_pResponder) {
+    std::cout << "DEBUG: Session::send - No responder available" << std::endl;
     return false;
   }
+  std::cout << "DEBUG: Session::send - About to log outgoing message: [" << (string.length() > 50 ? string.substr(0, 50) + "..." : string) << "]" << std::endl;
   m_state.onOutgoing(string);
   return m_pResponder->send(string);
 }
@@ -1165,6 +1167,7 @@ bool Session::nextQueued(SEQNUM num, const UtcTimeStamp &now) {
 
 void Session::next(const std::string &msg, const UtcTimeStamp &now, bool queued) {
   try {
+    std::cout << "DEBUG: Session::next - About to log incoming message: [" << (msg.length() > 50 ? msg.substr(0, 50) + "..." : msg) << "]" << std::endl;
     m_state.onIncoming(msg);
     const DataDictionary &sessionDD = m_dataDictionaryProvider.getSessionDataDictionary(m_sessionID.getBeginString());
     if (m_sessionID.isFIXT()) {

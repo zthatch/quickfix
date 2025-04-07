@@ -189,6 +189,8 @@ void OdbcLog::clear() {
 void OdbcLog::backup() {}
 
 void OdbcLog::insert(const std::string &table, const std::string value) {
+  std::cout << "DEBUG: OdbcLog::insert - Inserting into table '" << table 
+            << "', connected: " << (m_pConnection != nullptr ? "yes" : "no") << std::endl;
   UtcTimeStamp time = UtcTimeStamp::now();
   int year, month, day, hour, minute, second, millis;
   time.getYMD(year, month, day);
@@ -220,6 +222,8 @@ void OdbcLog::insert(const std::string &table, const std::string value) {
   }
 
   queryString << "'" << valueCopy << "')";
+
+  std::cout << "DEBUG: OdbcLog::insert - SQL query: " << queryString.str() << std::endl;
 
   OdbcQuery query(queryString.str());
   m_pConnection->execute(query);
