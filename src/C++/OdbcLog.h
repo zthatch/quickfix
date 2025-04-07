@@ -56,14 +56,8 @@ public:
   void setOutgoingTable(const std::string &outgoingTable) { m_outgoingTable = outgoingTable; }
   void setEventTable(const std::string &eventTable) { m_eventTable = eventTable; }
 
-  void onIncoming(const std::string &value) {
-    std::cout << "DEBUG: OdbcLog::onIncoming called with message of length " << value.length() << std::endl;
-    insert(m_incomingTable, value); 
-  }
-  void onOutgoing(const std::string &value) {
-    std::cout << "DEBUG: OdbcLog::onOutgoing called with message of length " << value.length() << std::endl;
-    insert(m_outgoingTable, value); 
-  }
+  void onIncoming(const std::string &value) { insert(m_incomingTable, value); }
+  void onOutgoing(const std::string &value) { insert(m_outgoingTable, value); }
   void onEvent(const std::string &value) { insert(m_eventTable, value); }
 
 private:
